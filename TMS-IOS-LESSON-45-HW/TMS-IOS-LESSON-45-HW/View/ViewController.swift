@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         
-        vm.subscribeToCounter(label: label)
+        vm.counter.sink {self.label.text = $0}.store(in: &vm.cancellable)
     }
     
     

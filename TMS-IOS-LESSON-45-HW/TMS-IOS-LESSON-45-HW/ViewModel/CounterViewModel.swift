@@ -2,13 +2,9 @@ import Combine
 import UIKit
 
 final class CounterViewModel {
-    private var counter = CurrentValueSubject<String, Never>("0")
-    private var cancellable = [AnyCancellable]()
-    
-    func subscribeToCounter(label: UILabel) {
-        counter.sink {label.text = $0}.store(in: &cancellable)
-    }
-    
+    private(set) var counter = CurrentValueSubject<String, Never>("0")
+    var cancellable = [AnyCancellable]()
+
     func plus() {
         counter.send(String((Int(counter.value) ?? 0) + 1))
     }
